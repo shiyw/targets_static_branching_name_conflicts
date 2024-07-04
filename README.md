@@ -1,7 +1,22 @@
 # Name conflicts when static branching with targets
 
-{target} won't warn (currently) name conflict of names from `values` of `tar_map` and names in `command` of `tar_target`.
+{tarchetypes} does warn name conflict of names from `values` of `tar_map` and names in `command` of `tar_target`.
 
+```r
+# _targets.R
+f <- \() cat("Hi")
+
+values <- tibble::tibble(
+  f = 1:10
+)
+
+list(
+  tar_map(
+    values = values,
+    tar_target(target, f())
+  )
+)
+```
 
 ```r
 tar_make()
